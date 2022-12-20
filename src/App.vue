@@ -1,26 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <dir id="app" class="app">
+    
+    <div class="hat">
+      <MainHat/>
+    </div>
+    <v-popup
+    v-if="isInfoPopupVisible"
+    />
+    <div class="panel">
+
+      <div class="create">
+        <CreateTask/>
+      </div>
+
+      <div class="task">
+        <Task/>
+      </div>
+
+    </div>
+
+  </dir>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import CreateTask from './components/СreateTask.vue'
+import MainHat from './components/MainHat.vue'
+import Task from './components/BoardTask.vue'
+//import { thisTypeAnnotation } from '@babel/types';
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'app',
+    components: {
+      MainHat, 
+      CreateTask,
+      Task
+    }
+    
+} 
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.app
+{
+  margin: 0;
+  padding: 0;
+}
+.panel
+{
+  background: #f8f9fd;
+  position: relative;
+}
+.hat
+{
+  position: relative;
+  display: table;
+  width: 100%;
+  background: white;
+}
+.create {
+  position: relative;
+  margin-bottom: 20px;
+  display: table;
+  width: 100%;
 }
 </style>
