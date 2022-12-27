@@ -1,7 +1,12 @@
 <template>
+  <vEditPopup
+      v-show="isEditPopupVisible && isBackEffect"
+      @closeEditPopup="closeEditPopup"
+      :class="{'panel-popup-cens': isBackEffect}"
+  />
     <div class="task">
       <div class="content" 
-        :class="{ 'task-panel': true }" 
+        :class="{ 'task-panel': true}" 
         @drop="onDrop($event, category.id)"
         v-for="category in categories"
         :key="category.id"
@@ -14,16 +19,19 @@
           :key="item.id" 
           draggable="true" 
           class="draggable">
-          <h5>{{item.title}}</h5>
-
+          <h5 @dblclick="showEditPopup">{{item.title}}</h5>
         </div>
       </div>
     </div>
 </template>
 <script>
 import { ref } from 'vue'
+import vEditPopup from '../popup/editTaskPopup.vue'
 
   export default {
+    components: {
+      vEditPopup
+    },
       setup(){
         const items = ref([
         {
@@ -83,19 +91,44 @@ import { ref } from 'vue'
           onDragStart,
           onDrop
         }
+      },
+      methods:{
+      showEditPopup(){
+        this.isEditPopupVisible = true;
+        this.isBackEffect = true;
+      },
+      closeEditPopup(){
+        this.isEditPopupVisible = false;
+        this.isBackEffect = false;
+      },
+      data(){
+        return{
+          isEditPopupVisible: false,
+          isBackEffect: false
+        }
       }
+    }
   }
 </script>
 <style scoped>
 .task
 {
-  position: absolute;
+  position: static;
   display: table;
   
 }
 .task-panel
 {
-    background: white;
+    display: table-cell;
+    border-radius: 3px;
+    position: static;
+    width: 1%;
+    padding-left: 10px;
+    font-family: Andale Mono, monospace;
+    font-weight: 500;
+}
+.task-panel-popup
+{
     display: table-cell;
     border-radius: 3px;
     position: relative;
@@ -107,5 +140,11 @@ import { ref } from 'vue'
 .content
 {
   border-left: thick, solid, var(--color)
+}
+.panel-popup-cens
+{
+  background: #5c5c5ca3;
+  width: 100%;
+  height: 100%;
 }
 </style>

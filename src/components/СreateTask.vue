@@ -1,9 +1,11 @@
 <template>
-
-  <v-popup
-    v-if="isInfoPopupVisible"
-  />
-
+  <div class="panel-popup">
+    <v-popup
+      v-show="isInfoPopupVisible && isBackEffect"
+      @closePopup="closePopup"
+      :class="{'panel-popup-cens': isBackEffect}"
+    />
+  </div>
   <div class="d-table w-100">
     <p class="text">Задачи</p>
     <div class="d-table-cell tar">
@@ -13,19 +15,25 @@
   </div>
 </template>
 <script>
-import vPopup from '../popup/editTask.vue'
+import vPopup from '../popup/createTaskPopup.vue'
 export default {
     components:{
       vPopup
     },
     data(){
       return{
-        isInfoPopupVisible: false
+        isInfoPopupVisible: false,
+        isBackEffect: false
       }
     },
     methods:{
       showPopup(){
         this.isInfoPopupVisible = true;
+        this.isBackEffect = true;
+      },
+      closePopup(){
+        this.isInfoPopupVisible = false;
+        this.isBackEffect = false;
       }
     }
 }
@@ -79,5 +87,11 @@ export default {
 
 .tar {
   text-align: right;
+}
+.panel-popup-cens
+{
+  background: #5c5c5ca3;
+  width: 100%;
+  height: 100%;
 }
 </style>

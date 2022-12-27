@@ -1,12 +1,9 @@
 <template>
   <dir id="app" class="app">
-    
+
     <div class="hat">
       <MainHat/>
     </div>
-    <v-popup
-    v-if="isInfoPopupVisible"
-    />
     <div class="panel">
 
       <div class="create">
@@ -61,5 +58,13 @@ export default {
   margin-bottom: 20px;
   display: table;
   width: 100%;
+}
+.task
+{
+  background: white;
+}
+.taskSenc
+{
+  background: rgb(148, 148, 148);
 }
 </style>
