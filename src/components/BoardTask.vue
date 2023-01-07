@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    
 </template>
 <script>
 import { ref } from 'vue'
@@ -30,8 +31,8 @@ import vEditPopup from '../popup/editTaskPopup.vue'
 
   export default {
     components: {
-      vEditPopup
-    },
+    vEditPopup
+},
       setup(){
         const items = ref([
         {
@@ -100,12 +101,13 @@ import vEditPopup from '../popup/editTaskPopup.vue'
       closeEditPopup(){
         this.isEditPopupVisible = false;
         this.isBackEffect = false;
-      },
-      data(){
-        return{
-          isEditPopupVisible: false,
-          isBackEffect: false
-        }
+      }
+    },
+    data() {
+      return{
+        isEditPopupVisible: false,
+        isBackEffect: false,
+        showContextMenu: false
       }
     }
   }
